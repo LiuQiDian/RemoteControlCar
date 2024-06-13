@@ -1,0 +1,39 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build",
+            "type": "shell",
+            "command": "make",
+            "args": [],
+            "group": "build",
+            "presentation": {
+                // Reveal the output only if unrecognized errors occur.
+                "reveal": "silent"
+            },
+            // Use the standard MS compiler pattern to detect errors, warnings and infos
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Build & Update",
+            "type": "shell",
+            "command": "openocd",
+            "args": [
+                "-f",
+                "E:/VS code/openocd-0.10.0/scripts/interface/stlink-v2.cfg",
+                "-f",
+                "E:/VS code/openocd-0.10.0/scripts/target/stm32f4x.cfg",
+                "-c",
+                "program build/RemoteControlCar.elf verify reset exit"
+            ],
+            "group": "build",
+            "dependsOn":"Build",
+            "presentation": {
+                // Reveal the output only if unrecognized errors occur.
+                "reveal": "silent"
+            },
+            // Use the standard MS compiler pattern to detect errors, warnings and infos
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}
