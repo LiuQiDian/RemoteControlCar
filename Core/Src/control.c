@@ -28,10 +28,13 @@ void CONTROL_Stop()
 // 控制电机运行
 void MOTOR_Run(int dutycycle)
 {
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, dutycycle);
 }
 
 // 控制电机速度
 void MOTOR_SetSpeed(int dutycycle)
 {
+    // 左电机速度控制
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, dutycycle);
+    // 右电机速度控制
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_4, dutycycle);
 }
