@@ -2,7 +2,7 @@
 
 uint8_t USART1_RX_BUF[USART1_RX_LEN]; // 串口接收缓冲,最大USART1_RX_LEN个字节.
 uint16_t USART1_RX_STA = 0;           // 接收状态标记
-uint8_t USART1_NeData;                // 最新接收到的数据
+uint8_t USART1_NewData;               // 最新接收到的数据
 
 // 蓝牙初始化
 void BLUETOOTH_Init()
@@ -31,18 +31,18 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
         {
             if (USART1_RX_STA & 0x4000)
             {
-                if (USART1_NeData != 0x0a)
+                if (USART1_NewData != 0x0a)
                     USART1_RX_STA = 0;
                 else
                     USART1_RX_STA |= 0x8000;
             }
             else
             {
-                if (USART1_NeData == 0x0d)
+                if (USART1_NewData == 0x0d)
                     USART1_RX_STA |= 0x4000;
                 else
                 {
-                    USART1_RX_BUF[USART1_RX_STA & 0X3FFF] = USART1_NeData;
+                    USART1_RX_BUF[USART1_RX_STA & 0X3FFF] = USART1_NewData;
                     USART1_RX_STA++;
                     if (USART1_RX_STA > (USART1_RX_LEN - 1))
                         USART1_RX_STA = 0;

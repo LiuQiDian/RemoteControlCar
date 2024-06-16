@@ -13,7 +13,7 @@ extern "C"
     extern UART_HandleTypeDef huart1;
     extern uint8_t USART1_RX_BUF[USART1_RX_LEN]; // 串口接收缓冲,最大USART1_RX_LEN个字节.
     extern uint16_t USART1_RX_STA;               // 接收状态标记
-    extern uint8_t USART1_NeData;                // 最新接收到的数据
+    extern uint8_t USART1_NewData;               // 最新接收到的数据
 
     void BLUETOOTH_Init();
     void BLUETOOTH_Send(uint8_t *data, uint16_t size);
